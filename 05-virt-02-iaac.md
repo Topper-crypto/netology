@@ -81,7 +81,41 @@ ansible 2.10.8
 ### Задача 4 (*)
 > Воспроизвести практическую часть лекции самостоятельно.
 > * Создать виртуальную машину.
-> * Зайти внутрь ВМ, убедиться, что Docker установлен с помощью команды
+> * Зайти внутрь ВМ, убедиться, что Docker установлен с помощью команды ```docker ps```
 
 ### Решение 
-В процессе, возникли ошибки.
+
+```TASK [Installing docker] *******************************************************
+[WARNING]: Consider using the get_url or uri module rather than running 'curl'.
+If you need to use command because get_url or uri is insufficient you can add
+'warn: false' to this command task or set 'command_warnings=False' in
+ansible.cfg to get rid of this message.
+changed: [server1.netology]
+
+TASK [Add the current user to docker group] ************************************
+changed: [server1.netology]
+
+PLAY RECAP *********************************************************************
+server1.netology           : ok=7    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=1   
+
+user@user-Aspire-5745DG:~/netology/vagrant$ vagrant ssh
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-91-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Wed 04 May 2022 08:34:59 PM UTC
+
+  System load:  0.66               Processes:                115
+  Usage of /:   13.5% of 30.88GB   Users logged in:          0
+  Memory usage: 30%                IPv4 address for docker0: 172.17.0.1
+  Swap usage:   0%                 IPv4 address for eth0:    10.0.2.15
+
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+Last login: Wed May  4 20:34:39 2022 from 10.0.2.2
+vagrant@vagrant:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+vagrant@vagrant:~$ ```
