@@ -110,12 +110,10 @@ Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-91-generic x86_64)
   System load:  0.66               Processes:                115
   Usage of /:   13.5% of 30.88GB   Users logged in:          0
   Memory usage: 30%                IPv4 address for docker0: 172.17.0.1
-  Swap usage:   0%                 IPv4 address for eth0:    10.0.2.15
-
+  Swap usage:   0%                 IPv4 address for eth0:    192.168.192.11
 
 This system is built by the Bento project by Chef Software
 More information can be found at https://github.com/chef/bento
-Last login: Wed May  4 20:34:39 2022 from 10.0.2.2
-vagrant@vagrant:~$ docker ps
+vagrant@server1:~$ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-vagrant@vagrant:~$ ```
+vagrant@server1:~$ ```
