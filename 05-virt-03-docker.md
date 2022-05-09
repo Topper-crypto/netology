@@ -54,6 +54,48 @@ https://hub.docker.com/repository/docker/topper80/netology
 > * Подключитесь к первому контейнеру с помощью docker exec и создайте текстовый файл любого содержания в /data;
 > * Добавьте еще один файл в папку /data на хостовой машине;
 > * Подключитесь во второй контейнер и отобразите листинг и содержание файлов в /data контейнера.
+> 
+### Решение
+1. Запустите первый контейнер из образа centos c любым тэгом в фоновом режиме, подключив папку /data из текущей рабочей директории на хостовой машине в /data контейнера.
+
+```
+[topper@fedora ~]$ sudo docker run --name centos-01 -v /home/topper/data:/share/data -d centos sleep 99999
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+a1d0c7532777: Pull complete 
+Digest: sha256:a27fd8080b517143cbbbab9dfb7c8571c40d67d534bbdee55bd6c473f432b177
+Status: Downloaded newer image for centos:latest
+1833e27ae7161569cbf5445687bb96b164aed6d90e5869c94156d02dd5abfdd7
+```
+2. Запустите второй контейнер из образа debian в фоновом режиме, подключив папку /data из текущей рабочей директории на хостовой машине в /data контейнера.
+```
+[topper@fedora ~]$ sudo docker run --name debian-01 -v /home/topper/data:/data -d debian sleep 99999
+Unable to find image 'debian:latest' locally
+latest: Pulling from library/debian
+6aefca2dc61d: Pull complete 
+Digest: sha256:6846593d7d8613e5dcc68c8f7d8b8e3179c7f3397b84a47c5b2ce989ef1075a0
+Status: Downloaded newer image for debian:latest
+338af1a6383d10727545fde23359375c49add332589ffc559416e56aa18042f0
+```
+3. Подключитесь к первому контейнеру с помощью docker exec и создайте текстовый файл любого содержания в /data.
+```
+[topper@fedora ~]$ sudo docker exec -ti centos-01 bash
+[root@1833e27ae716 /]# echo "test file" > /share/data/file.test
+```
+4. Добавьте еще один файл в папку /data на хостовой машине.
+```
+[topper@fedora ~]$ echo "test file 1" > /home/topper/data/file1.test
+```
+5. Подключитесь во второй контейнер и отобразите листинг и содержание файлов в /data контейнера.
+```
+[topper@fedora ~]$ sudo docker exec -ti debian-01 bash
+root@338af1a6383d:/# ls -la /data
+total 8
+drwxrwxrwx. 1 root root  38 May  9 19:26 .
+drwxr-xr-x. 1 root root 160 May  9 19:23 ..
+-rw-r--r--. 1 root root  10 May  9 19:25 file.test
+-rw-r--r--. 1 1000 1000  12 May  9 19:26 file1.test
+```
 
 ### Задача 4 (*)
 > Воспроизвести практическую часть лекции самостоятельно.
