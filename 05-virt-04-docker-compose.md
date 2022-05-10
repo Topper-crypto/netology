@@ -24,6 +24,14 @@
 > 
 > * Скриншот страницы свойств созданной ВМ, как на примере ниже.
 ### Решение:
+```
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+external_ip_address_node01_yandex_cloud = "51.250.72.94"
+internal_ip_address_node01_yandex_cloud = "192.168.101.13"
+```
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/YC_VM.png)
 
 ### Задача 3
