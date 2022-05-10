@@ -41,6 +41,9 @@ internal_ip_address_node01_yandex_cloud = "192.168.101.13"
 > 
 > * Скриншот работающего веб-интерфейса Grafana с текущими метриками, как на примере ниже
 ### Решение:
+```
+node01.netology.cloud      : ok=12   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/YC_MonitorServices.png)
 ### Задача 4 (*)
 > Создать вторую ВМ и подключить её к мониторингу развёрнутому на первом сервере.
