@@ -26,7 +26,7 @@ Overlay-сеть использует технологию vxlan, которая
 docker node ls
 ```
 ### Решение:
-
+![](https://github.com/Topper-crypto/netology/blob/main/assets/docker_node_ls.png)
 ### Задача 3
 
 > Создать ваш первый, готовый к боевой эксплуатации кластер мониторинга, состоящий из стека микросервисов.
@@ -36,3 +36,4 @@ docker node ls
 docker service ls
 ```
 ### Решение:
+![](https://github.com/Topper-crypto/netology/blob/main/assets/docker_service_ls.png)
