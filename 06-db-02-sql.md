@@ -49,8 +49,6 @@ postgres=# CREATE ROLE "test-admin-user" SUPERUSER NOCREATEDB NOCREATEROLE NOINH
 CREATE ROLE
 ```
 ```
-test_db=# \dt
-Did not find any relations.
 test_db=# CREATE TABLE orders 
 (
 id integer, 
