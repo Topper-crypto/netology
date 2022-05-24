@@ -4,6 +4,17 @@
 > Используя docker поднимите инстанс PostgreSQL (версию 12) c 2 volume, в который будут складываться данные БД и бэкапы.
 >
 > Приведите получившуюся команду или docker-compose манифест.
+### Решение:
+```
+[topper@fedora ~]$ sudo docker pull postgres:12
+[topper@fedora ~]$ sudo docker volume create vol1
+vol1
+[topper@fedora ~]$ sudo docker volume create vol2
+vol2
+[topper@fedora ~]$ sudo docker run --rm --name pg-docker -e POSTGRES_PASSWORD=postgres -ti -p 5432:5432 -v vol1:/var/lib/postgresql/data -v vol2:/var/lib/postgresql postgres:12
+docker run --rm --name pg-docker -e POSTGRES_PASSWORD=postgres -ti -p 5432:5432 -v vol1:/var/lib/postgresql/data -v vol2:/var/lib/postgresql postgres:12
+docker run --name postgres -e POSTGRES_PASSWORD=postgres -it --rm -v db-data:/var/lib/postgresql/data -v db-backup:/backup -p 5432:5432 postgres:12
+```
 
 ### Задача 2
 > В БД из задачи 1:
@@ -30,6 +41,60 @@
 > * описание таблиц (describe)
 > * SQL-запрос для выдачи списка пользователей с правами над таблицами test_db
 > * список пользователей с правами над таблицами test_db
+### Решение: 
+```
+postgres=# CREATE DATABASE test_db;
+CREATE DATABASE
+```
+```
+postgres=# CREATE ROLE "test-admin-user" SUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN;
+CREATE ROLE
+```
+```
+test_db=# \dt
+Did not find any relations.
+test_db=# CREATE TABLE orders 
+(
+id integer, 
+name text, 
+price integer, 
+PRIMARY KEY (id) 
+);
+CREATE TABLE
+```
+```
+test_db=# CREATE TABLE clients 
+(
+        id integer PRIMARY KEY,
+        lastname text,
+        country text,
+        booking integer,
+        FOREIGN KEY (booking) REFERENCES orders (Id)
+);
+CREATE TABLE
+```
+```
+postgres=# CREATE ROLE "test-simple-user" NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN;
+CREATE ROLE
+```
+```
+test_db=# GRANT SELECT ON TABLE public.clients TO "test-simple-user";
+GRANT
+test_db=# GRANT INSERT ON TABLE public.clients TO "test-simple-user";
+GRANT
+test_db=# GRANT UPDATE ON TABLE public.clients TO "test-simple-user";
+GRANT
+test_db=# GRANT DELETE ON TABLE public.clients TO "test-simple-user";
+GRANT
+test_db=# GRANT SELECT ON TABLE public.orders TO "test-simple-user";
+GRANT
+test_db=# GRANT INSERT ON TABLE public.orders TO "test-simple-user";
+GRANT
+test_db=# GRANT UPDATE ON TABLE public.orders TO "test-simple-user";
+GRANT
+test_db=# GRANT DELETE ON TABLE public.orders TO "test-simple-user";
+GRANT
+```
 
 ### Задача 3
 > Используя SQL синтаксис - наполните таблицы следующими тестовыми данными:
