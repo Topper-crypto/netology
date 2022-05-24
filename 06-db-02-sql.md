@@ -12,8 +12,6 @@ vol1
 [topper@fedora ~]$ sudo docker volume create vol2
 vol2
 [topper@fedora ~]$ sudo docker run --rm --name pg-docker -e POSTGRES_PASSWORD=postgres -ti -p 5432:5432 -v vol1:/var/lib/postgresql/data -v vol2:/var/lib/postgresql postgres:12
-docker run --rm --name pg-docker -e POSTGRES_PASSWORD=postgres -ti -p 5432:5432 -v vol1:/var/lib/postgresql/data -v vol2:/var/lib/postgresql postgres:12
-docker run --name postgres -e POSTGRES_PASSWORD=postgres -it --rm -v db-data:/var/lib/postgresql/data -v db-backup:/backup -p 5432:5432 postgres:12
 ```
 
 ### Задача 2
