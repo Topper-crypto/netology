@@ -161,6 +161,18 @@ INSERT 0 5
 > 
 > Подсказк - используйте директиву ```UPDATE```.
 
+### Решение:
+```
+test_db=# UPDATE clients SET "booking" = (SELECT id FROM orders WHERE "name"='Книга') WHERE "lastname"='Иванов Иван Иванович';
+UPDATE 1
+test_db=# UPDATE clients SET "booking" = (SELECT id FROM orders WHERE "name"='Монитор') WHERE "lastname"='Петров Петр Петрович';
+UPDATE 1
+test_db=# UPDATE clients SET "booking" = (SELECT id FROM orders WHERE "name"='Гитара') WHERE "lastname"='Иоганн Себастьян Бах';
+UPDATE 1
+```
+![](https://github.com/Topper-crypto/netology/blob/main/assets/psql7.png)
+
+
 ### Задача 5
 > Получите полную информацию по выполнению запроса выдачи всех пользователей из задачи 4 (используя директиву EXPLAIN).
 > 
