@@ -13,6 +13,7 @@ vol1
 vol2
 [topper@fedora ~]$ sudo docker run --rm --name pg-docker -e POSTGRES_PASSWORD=postgres -ti -p 5432:5432 -v vol1:/var/lib/postgresql/data -v vol2:/var/lib/postgresql postgres:12
 ```
+![](https://github.com/Topper-crypto/netology/blob/main/assets/psql.png)
 
 ### Задача 2
 > В БД из задачи 1:
@@ -92,6 +93,12 @@ test_db=# GRANT DELETE ON TABLE public.orders TO "test-simple-user";
 GRANT
 ```
 
+![](https://github.com/Topper-crypto/netology/blob/main/assets/psql2.png)
+
+![](https://github.com/Topper-crypto/netology/blob/main/assets/psql4.png)
+
+![](https://github.com/Topper-crypto/netology/blob/main/assets/psql3.png)
+
 ### Задача 3
 > Используя SQL синтаксис - наполните таблицы следующими тестовыми данными:
 > 
@@ -132,6 +139,7 @@ test_db=# insert into clients VALUES (1, 'Иванов Иван Иванович
 INSERT 0 5
 ```
 
+![](https://github.com/Topper-crypto/netology/blob/main/assets/psql5.png)
 
 ### Задача 4
 > Часть пользователей из таблицы clients решили оформить заказы из таблицы orders.
