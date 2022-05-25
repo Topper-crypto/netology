@@ -210,8 +210,33 @@ UPDATE 1
 ### Решение:
 ```
 [topper@fedora /]$ sudo docker exec -t pg-docker pg_dump -U postgres test_db -f /var/lib/postgresql/data/dump_test.sql
-```
-```
-[topper@fedora /]$ sudo find / -name dump_test.sql
-/var/lib/docker/volumes/vol1/_data/dump_test.sql
+
+[topper@fedora /]$ sudo docker exec -i pg-docker2 psql -U postgres -d test_db -f /var/lib/postgresql/data/dump_test.sql
+SET
+SET
+SET
+SET
+SET
+ set_config 
+------------
+ 
+(1 row)
+
+SET
+SET
+SET
+SET
+SET
+SET
+CREATE TABLE
+ALTER TABLE
+CREATE TABLE
+ALTER TABLE
+COPY 5
+COPY 5
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+GRANT
+GRANT
 ```
