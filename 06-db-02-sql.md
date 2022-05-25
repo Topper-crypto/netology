@@ -208,3 +208,10 @@ UPDATE 1
 > Приведите список операций, который вы применяли для бэкапа данных и восстановления.
 
 ### Решение:
+```
+[topper@fedora /]$ sudo docker exec -t pg-docker pg_dump -U postgres test_db -f /var/lib/postgresql/data/dump_test.sql
+```
+```
+[topper@fedora /]$ sudo find / -name dump_test.sql
+/var/lib/docker/volumes/vol1/_data/dump_test.sql
+```
