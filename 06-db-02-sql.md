@@ -93,6 +93,8 @@ test_db=# GRANT DELETE ON TABLE public.orders TO "test-simple-user";
 GRANT
 ```
 
+![](https://github.com/Topper-crypto/netology/blob/main/assets/psql6.png)
+
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/psql2.png)
 
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/psql4.png)
