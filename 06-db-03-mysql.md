@@ -162,7 +162,7 @@ mysql> SHOW PROFILES;
 | Query_ID | Duration   | Query                                                                                                                                       |
 +----------+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 |        1 | 0.00024900 | SET profiling = 1                                                                                                                           |
-|        2 | 0.00990525 | SELECT TABLE_NAME,ENGINE,ROW_FORMAT,TABLE_ROWS,DATA_LENGTH,INDEX_LENGTH FROM information_schema.TABLES WHERE table_name = 'orders' and                                                                                                                                TABLE_SCHEMA = 'test_db' ORDER BY ENGINE asc |
+|        2 | 0.00990525 | SELECT TABLE_NAME,ENGINE,ROW_FORMAT,TABLE_ROWS,DATA_LENGTH,INDEX_LENGTH FROM information_schema.TABLES WHERE table_name = 'orders' and TABLE_SCHEMA = 'test_db' ORDER BY ENGINE asc |
 |        3 | 0.08379375 | ALTER TABLE orders ENGINE = MyISAM                                                                                                          |
 |        4 | 0.17647475 | ALTER TABLE orders ENGINE = InnoDB                                                                                                          |
 +----------+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
