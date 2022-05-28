@@ -126,9 +126,63 @@ test_database=# select avg_width from pg_stats where tablename='orders';
 > 
 > Можно ли было изначально исключить "ручное" разбиение при проектировании таблицы orders?
 ### Решение: 
+```
+test_database=# alter table orders rename to orders_simple;
+ALTER TABLE
+test_database=# create table orders (id integer, title varchar(80), price integer) partition by range(price);
+CREATE TABLE
+test_database=# create table orders_less499 partition of orders for values from (0) to (499);
+CREATE TABLE
+test_database=# create table orders_more499 partition of orders for values from (499) to (999999999);
+CREATE TABLE
+test_database=# insert into orders (id, title, price) select * from orders_simple;
+INSERT 0 8
+```
+```
+test_database=# \dt
+                   List of relations
+ Schema |      Name      |       Type        |  Owner   
+--------+----------------+-------------------+----------
+ public | orders         | partitioned table | postgres
+ public | orders_less499 | table             | postgres
+ public | orders_more499 | table             | postgres
+ public | orders_simple  | table             | postgres
+(4 rows)
+test_database=# select * from orders_more499;
+ id |       title        | price 
+----+--------------------+-------
+  2 | My little database |   500
+  6 | WAL never lies     |   900
+  7 | Me and my bash-pet |   499
+  8 | Dbiezdmin          |   501
+(4 rows)
+
+test_database=# select * from orders_less499;
+ id |        title         | price 
+----+----------------------+-------
+  1 | War and peace        |   100
+  3 | Adventure psql time  |   300
+  4 | Server gravity falls |   300
+  5 | Log gossips          |   123
+(4 rows)
+```
+### Ответ:
+Да можно если при изначальном проектировании таблиц сделать ее секционированной.
 
 ### Задача 4
 > Используя утилиту ```pg_dump``` создайте бекап БД ```test_database```.
 > 
 > Как бы вы доработали бэкап-файл, чтобы добавить уникальность значения столбца ```title``` для таблиц ```test_database```?
 ### Решение: 
+```
+root@77d2d8cdbb3a:/var/lib/postgresql/data# pg_dump -U postgres test_database > ./test_database.dump
+root@77d2d8cdbb3a:/var/lib/postgresql/data# ls -lha
+total 8.0K
+drwxr-xr-x. 1 postgres     1000   62 May 28 23:02 .
+drwx------. 1 postgres postgres    2 May 28 22:11 ..
+-rw-r--r--. 1 root     root     3.5K May 28 23:02 test_database.dump
+-rw-r--r--. 1 postgres     1000 2.1K May 28 22:04 test_dump.sql
+```
+### Ответ:
+Для уникальности можно добавить индекс или первичный ключ.
+    ```CREATE INDEX ON orders ((lower(title)));```
