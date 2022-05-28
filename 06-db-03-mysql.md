@@ -134,10 +134,9 @@ mysql> SHOW PROFILES;
 +----------+------------+----------------------------------------------------------------------------------------+
 | Query_ID | Duration   | Query                                                                                  |
 +----------+------------+----------------------------------------------------------------------------------------+
-|        1 | 0.00336675 | SELECT TABLE_NAME,ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'test_db' |
-|        2 | 0.00024900 | SET profiling = 1                                                                      |
+|        1 | 0.00024900 | SET profiling = 1                                                                      |
 +----------+------------+----------------------------------------------------------------------------------------+
-2 rows in set, 1 warning (0.00 sec)
+1 rows in set, 0 warning (0.00 sec)
 ```
 ```
 mysql> SELECT TABLE_NAME,ENGINE,ROW_FORMAT,TABLE_ROWS,DATA_LENGTH,INDEX_LENGTH FROM information_schema.TABLES WHERE table_name = 'orders' and  TABLE_SCHEMA = 'test_db' ORDER BY ENGINE asc;
@@ -162,13 +161,12 @@ mysql> SHOW PROFILES;
 +----------+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
 | Query_ID | Duration   | Query                                                                                                                                       |
 +----------+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-|        1 | 0.00336675 | SELECT TABLE_NAME,ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'test_db'                                                      |
-|        2 | 0.00024900 | SET profiling = 1                                                                                                                           |
-|        3 | 0.00990525 | SELECT TABLE_NAME,ENGINE,ROW_FORMAT,TABLE_ROWS,DATA_LENGTH,INDEX_LENGTH FROM information_schema.TABLES WHERE table_name = 'orders' and                                                                                                                                TABLE_SCHEMA = 'test_db' ORDER BY ENGINE asc |
-|        4 | 0.08379375 | ALTER TABLE orders ENGINE = MyISAM                                                                                                          |
-|        5 | 0.17647475 | ALTER TABLE orders ENGINE = InnoDB                                                                                                          |
+|        1 | 0.00024900 | SET profiling = 1                                                                                                                           |
+|        2 | 0.00990525 | SELECT TABLE_NAME,ENGINE,ROW_FORMAT,TABLE_ROWS,DATA_LENGTH,INDEX_LENGTH FROM information_schema.TABLES WHERE table_name = 'orders' and                                                                                                                                TABLE_SCHEMA = 'test_db' ORDER BY ENGINE asc |
+|        3 | 0.08379375 | ALTER TABLE orders ENGINE = MyISAM                                                                                                          |
+|        4 | 0.17647475 | ALTER TABLE orders ENGINE = InnoDB                                                                                                          |
 +----------+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-5 rows in set, 1 warning (0.00 sec)
+4 rows in set, 0 warning (0.00 sec)
 ```
 ### Задача 4
 > Изучите файл ```my.cnf``` в директории /etc/mysql.
