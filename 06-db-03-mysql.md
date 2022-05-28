@@ -129,8 +129,47 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE USER='test';
 > * на ```MyISAM```
 > * на ```InnoDB```
 ### Решение:
+```
+mysql> SHOW PROFILES;
++----------+------------+----------------------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                                  |
++----------+------------+----------------------------------------------------------------------------------------+
+|        1 | 0.00336675 | SELECT TABLE_NAME,ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'test_db' |
+|        2 | 0.00024900 | SET profiling = 1                                                                      |
++----------+------------+----------------------------------------------------------------------------------------+
+2 rows in set, 1 warning (0.00 sec)
+```
+```
+mysql> SELECT TABLE_NAME,ENGINE,ROW_FORMAT,TABLE_ROWS,DATA_LENGTH,INDEX_LENGTH FROM information_schema.TABLES WHERE table_name = 'orders' and  TABLE_SCHEMA = 'test_db' ORDER BY ENGINE asc;
++------------+--------+------------+------------+-------------+--------------+
+| TABLE_NAME | ENGINE | ROW_FORMAT | TABLE_ROWS | DATA_LENGTH | INDEX_LENGTH |
++------------+--------+------------+------------+-------------+--------------+
+| orders     | InnoDB | Dynamic    |          5 |       16384 |            0 |
++------------+--------+------------+------------+-------------+--------------+
+1 row in set (0.01 sec)
+```
+```
+mysql> ALTER TABLE orders ENGINE = MyISAM;
+Query OK, 5 rows affected (0.08 sec)
+Records: 5  Duplicates: 0  Warnings: 0
 
-
+mysql> ALTER TABLE orders ENGINE = InnoDB;
+Query OK, 5 rows affected (0.18 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+```
+```
+mysql> SHOW PROFILES;
++----------+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                                                                                       |
++----------+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+|        1 | 0.00336675 | SELECT TABLE_NAME,ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'test_db'                                                      |
+|        2 | 0.00024900 | SET profiling = 1                                                                                                                           |
+|        3 | 0.00990525 | SELECT TABLE_NAME,ENGINE,ROW_FORMAT,TABLE_ROWS,DATA_LENGTH,INDEX_LENGTH FROM information_schema.TABLES WHERE table_name = 'orders' and                                                                                                                                TABLE_SCHEMA = 'test_db' ORDER BY ENGINE asc |
+|        4 | 0.08379375 | ALTER TABLE orders ENGINE = MyISAM                                                                                                          |
+|        5 | 0.17647475 | ALTER TABLE orders ENGINE = InnoDB                                                                                                          |
++----------+------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+5 rows in set, 1 warning (0.00 sec)
+```
 ### Задача 4
 > Изучите файл ```my.cnf``` в директории /etc/mysql.
 > 
@@ -144,3 +183,19 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE USER='test';
 
 > Приведите в ответе измененный файл my.cnf.
 ### Решение:
+```
+[mysqld]
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+datadir         = /var/lib/mysql
+secure-file-priv= NULL
+
+# Custom config should go here
+!includedir /etc/mysql/conf.d/
+
+innodb_flush_log_at_trx_commit = 0
+innodb_file_format=Barracuda
+innodb_log_buffer_size  = 1M
+key_buffer_size = 640М
+max_binlog_size = 100M
+```
