@@ -184,5 +184,8 @@ drwx------. 1 postgres postgres    2 May 28 22:11 ..
 -rw-r--r--. 1 postgres     1000 2.1K May 28 22:04 test_dump.sql
 ```
 ### Ответ:
-Для уникальности можно добавить индекс или первичный ключ.
-    ```CREATE INDEX ON orders ((lower(title)));```
+Для уникальности можно добавить unique-индекс и UNIQUE constraints.
+
+Создание индекса для таблицы orders поля title:
+
+```create unique index orders_title_uindex on orders (title);```
