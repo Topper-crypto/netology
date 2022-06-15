@@ -127,15 +127,49 @@ curl -XDELETE http://localhost:9200/ind-3
 Пересобираем образ с необходимой папкой
 ```curl -XPUT http://localhost:9200/_snapshot/netology_backup?pretty -H 'content-type: application/json' -d'{ "type": "fs", "settings": { "location": "/usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots"}}'
 ```
+```
+    FROM topper80/elastic:1.0
 
-![]()
+    USER root
 
+    RUN mkdir /usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots && \
+        chown -R elasticsearch:elasticsearch /usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots && \
+        echo "path.repo: /usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots" >> /usr/elasticsearch/elasticsearch-7.17.3/config/elasticsearch.yml
+
+    USER elasticsearch
+```
+Используя API зарегистрируем  директорию как snapshot repository c именем netology_backup
+```
+curl -XPUT http://localhost:9200/_snapshot/netology_backup?pretty -H 'content-type: application/json' -d'{ "type": "fs", "settings": { "location": "/usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots"}}'
+
+{
+  "acknowledged" : true
+}
+
+curl -XGET http://localhost:9200/_snapshot/netology_backup?pretty
+
+{
+  "netology_backup" : {
+    "type" : "fs",
+    "settings" : {
+      "location" : "/usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots"
+    }
+  }
+}
+
+```
 Создаём индекс test с 0 реплик и 1 шардом
 ```
 curl -XPUT http://localhost:9200/test -H 'Content-Type: application/json' -d'{ "settings": { "number_of_sha
 rds": 1,  "number_of_replicas": 0 }}'
 ```
-![]()
+```
+curl -XGET 'http://localhost:9200/_cat/indices?v'
+
+health status index            uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .geoip_databases AX9pLLuVTaWYC0KZQAhSkg   1   0         41            0     38.8mb         38.8mb
+green  open   test             qp8R_5vETX6uzoPtXNW9zA   1   0          0            0       226b           226b
+```
 
 Создаём snapshot состояния кластера elasticsearch
 ```
@@ -143,18 +177,44 @@ curl -XPUT http://localhost:9200/_snapshot/netology_backup/first_snapshot?wait_f
 
 {"snapshot":{"snapshot":"first_snapshot","uuid":"cqIIRM4YQ0OTK5GwQg8h9g","repository":"netology_backup","version_id":7170399,"version":"7.17.3","indices":[".ds-.logs-deprecation.elasticsearch-default-2022.06.09-000001","test",".ds-ilm-history-5-2022.06.09-000001",".geoip_databases"],"data_streams":["ilm-history-5",".logs-deprecation.elasticsearch-default"],"include_global_state":true,"state":"SUCCESS","start_time":"2022-06-09T11:03:18.463Z","start_time_in_millis":1654772598463,"end_time":"2022-06-09T11:03:19.664Z","end_time_in_millis":1654772599664,"duration_in_millis":1201,"failures":[],"shards":{"total":4,"failed":0,"successful":4},"feature_states":[{"feature_name":"geoip","indices":[".geoip_databases"]}]}}
 ```
-![]()
-
+```
+curl -XGET 'http://localhost:9200/_snapshot?pretty'
+{
+  "netology_backup" : {
+    "type" : "fs",
+    "uuid" : "NRoWvyegRgqOkw2pgaNZcw",
+    "settings" : {
+      "location" : "/usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots"
+    }
+  }
+}
+```
 Cписок файлов в директории со snapshotами
-вывод
-
+```
+ll /usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots
+total 48
+-rw-r--r-- 1 elasticsearch elasticsearch  1426 Jun  9 11:03 index-0
+-rw-r--r-- 1 elasticsearch elasticsearch     8 Jun  9 11:03 index.latest
+drwxr-xr-x 6 elasticsearch elasticsearch  4096 Jun  9 11:03 indices
+-rw-r--r-- 1 elasticsearch elasticsearch 29251 Jun  9 11:03 meta-cqIIRM4YQ0OTK5GwQg8h9g.dat
+-rw-r--r-- 1 elasticsearch elasticsearch   713 Jun  9 11:03 snap-cqIIRM4YQ0OTK5GwQg8h9g.dat
+```
 Удаляем индекс test и создайте индекс test-2
-
-![]()
-
+```
+curl -XGET 'http://localhost:9200/_cat/indices?v'
+health status index            uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .geoip_databases AX9pLLuVTaWYC0KZQAhSkg   1   0         41            0     38.8mb         38.8mb
+green  open   test-2           mFpoqhi0SpC2KHRPejd04g   1   0          0            0       226b           226b
+```
 Восстанавливаем состояние кластера elasticsearch из snapshot, созданного ранее.
 
 ```
 curl -XPOST localhost:9200/_snapshot/netology_backup/first_snapshot/_restore?pretty -H 'content-type: application/json' -d'{"indices": "test"}'
 ```
-![]()
+```
+curl -XGET 'http://localhost:9200/_cat/indices?v'
+health status index            uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   .geoip_databases AX9pLLuVTaWYC0KZQAhSkg   1   0         41            0     38.8mb         38.8mb
+green  open   test-2           mFpoqhi0SpC2KHRPejd04g   1   0          0            0       226b           226b
+green  open   test             jc74Le3ASEWme4SpZjLdRw   1   0          0            0       226b           226b
+```
