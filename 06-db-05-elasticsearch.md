@@ -32,73 +32,92 @@
 > 
 > Далее мы будем работать с данным экземпляром elasticsearch.
 
-###Ответ:
+### Решение:
 
+![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic.png)
 
-
-
-
-
-
-
-
-
-
-## Задача 2
-
-В этом задании вы научитесь:
-- создавать и удалять индексы
-- изучать состояние кластера
-- обосновывать причину деградации доступности данных
-
-Ознакомтесь с [документацией](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html) 
-и добавьте в `elasticsearch` 3 индекса, в соответствии со таблицей:
-
+> ## Задача 2
+> 
+> В этом задании вы научитесь:
+> - создавать и удалять индексы
+> - изучать состояние кластера
+> - обосновывать причину деградации доступности данных
+> 
+> Ознакомтесь с [документацией](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html) и добавьте в `elasticsearch` 3 индекса, в соответствии со таблицей:
+> 
 | Имя | Количество реплик | Количество шард |
 |-----|-------------------|-----------------|
 | ind-1| 0 | 1 |
 | ind-2 | 1 | 2 |
 | ind-3 | 2 | 4 |
+> 
+> Получите список индексов и их статусов, используя API и **приведите в ответе** на задание.
+> 
+> Получите состояние кластера `elasticsearch`, используя API.
+> 
+> Как вы думаете, почему часть индексов и кластер находится в состоянии yellow?
+> 
+> Удалите все индексы.
+> 
+> **Важно**
+> 
+> При проектировании кластера elasticsearch нужно корректно рассчитывать количество реплик и шард, иначе возможна потеря данных индексов, вплоть до полной, при деградации системы.
 
-Получите список индексов и их статусов, используя API и **приведите в ответе** на задание.
+### Решение:
 
-Получите состояние кластера `elasticsearch`, используя API.
+Добавление индексов
+```
+curl -XPUT http://localhost:9200/ind-1 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 1,  "number_of_replicas": 0 }}'
+```
+```
+curl -XPUT http://localhost:9200/ind-2 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 2,  "number_of_replicas": 1 }}'
+```
+```
+curl -XPUT http://localhost:9200/ind-3 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 4,  "number_of_replicas": 2 }}'
+```
+Cписок индексов и их статусов:
+![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic_2.png)
+Cостояние кластера elasticsearch:
+![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic_3.png)
 
-Как вы думаете, почему часть индексов и кластер находится в состоянии yellow?
+Удаление индексов
+```
+curl -XDELETE http://localhost:9200/ind-1
+```
+```
+curl -XDELETE http://localhost:9200/ind-2
+```
+```
+curl -XDELETE http://localhost:9200/ind-3
+```
+![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic_4.png)
 
-Удалите все индексы.
-
-**Важно**
-
-При проектировании кластера elasticsearch нужно корректно рассчитывать количество реплик и шард,
-иначе возможна потеря данных индексов, вплоть до полной, при деградации системы.
+### Ответ:
+В настройках индекса указано количество реплик. Так как кластер однонодовый, реплицировать некуда. Кластер таким образом уведомляет о том, что заданные условия не работают в полной мере.
 
 ## Задача 3
 
-В данном задании вы научитесь:
-- создавать бэкапы данных
-- восстанавливать индексы из бэкапов
-
-Создайте директорию `{путь до корневой директории с elasticsearch в образе}/snapshots`.
-
-Используя API [зарегистрируйте](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#snapshots-register-repository) 
-данную директорию как `snapshot repository` c именем `netology_backup`.
-
-**Приведите в ответе** запрос API и результат вызова API для создания репозитория.
-
-Создайте индекс `test` с 0 реплик и 1 шардом и **приведите в ответе** список индексов.
-
-[Создайте `snapshot`](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html) 
-состояния кластера `elasticsearch`.
-
-**Приведите в ответе** список файлов в директории со `snapshot`ами.
-
-Удалите индекс `test` и создайте индекс `test-2`. **Приведите в ответе** список индексов.
-
-[Восстановите](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html) состояние
-кластера `elasticsearch` из `snapshot`, созданного ранее. 
-
-**Приведите в ответе** запрос к API восстановления и итоговый список индексов.
-
-Подсказки:
-- возможно вам понадобится доработать `elasticsearch.yml` в части директивы `path.repo` и перезапустить `elasticsearch`
+> В данном задании вы научитесь:
+> - создавать бэкапы данных
+> - восстанавливать индексы из бэкапов
+> 
+> Создайте директорию `{путь до корневой директории с elasticsearch в образе}/snapshots`.
+> 
+> Используя API [зарегистрируйте](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#snapshots-register-repository) данную директорию как `snapshot repository` c именем `netology_backup`.
+> 
+> **Приведите в ответе** запрос API и результат вызова API для создания репозитория.
+> 
+> Создайте индекс `test` с 0 реплик и 1 шардом и **приведите в ответе** список индексов.
+> 
+> [Создайте `snapshot`](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html) состояния кластера `elasticsearch`.
+> 
+> **Приведите в ответе** список файлов в директории со `snapshot`ами.
+> 
+> Удалите индекс `test` и создайте индекс `test-2`. **Приведите в ответе** список индексов.
+> 
+> [Восстановите](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html) состояние кластера `elasticsearch` из `snapshot`, созданного ранее. 
+> 
+> **Приведите в ответе** запрос к API восстановления и итоговый список индексов.
+> 
+> Подсказки:
+> - возможно вам понадобится доработать `elasticsearch.yml` в части директивы `path.repo` и перезапустить `elasticsearch`
