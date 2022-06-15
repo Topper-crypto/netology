@@ -1,32 +1,27 @@
 FROM centos:7
 
-MAINTAINER Rail Sakhaviev <sahaviev@gmail.com>
+    RUN yum install wget -y
+    RUN yum install -y java-11-openjdk wget curl perl-Digest-SHA
 
-RUN yum install java-11-openjdk -y
+    RUN wget https://зооточка62.рф/docs/elasticsearch-7.17.4-linux-x86_64.tar.gz
+    RUN mkdir /usr/elasticsearch && \
+        mv elasticsearch-7.17.3-linux-x86_64.tar.gz /usr/elasticsearch && \
+        cd /usr/elasticsearch && \
+        tar -xzf elasticsearch-7.17.3-linux-x86_64.tar.gz
 
-ENV PATH=/usr/lib:/usr/lib/jvm/jre-11/bin:$PATH \
-    ES_JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.14.1.1-1.el7_9.x86_64 \
-    ES_HOME=/etc/elasticsearch-7.17.1
+    COPY elasticsearch.yml /usr/elasticsearch/elasticsearch-7.17.3/config/elasticsearch.yml
 
-ADD https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.1-linux-x86_64.tar.gz /tmp/
-RUN tar -C /etc -xvzf /tmp/elasticsearch-7.17.1-linux-x86_64.tar.gz \
- && rm /tmp/elasticsearch-7.17.1-linux-x86_64.tar.gz
+    RUN groupadd elasticsearch && \
+        useradd elasticsearch -g elasticsearch -p elasticsearch && \
+        cd /opt && \
+        chown -R elasticsearch:elasticsearch /usr/elasticsearch
 
-COPY elasticsearch.yml ${ES_HOME}/config
+    RUN mkdir /var/lib/elasticsearch_data && \
+        chown -R elasticsearch:elasticsearch /var/lib/elasticsearch_data && \
+        mkdir /var/lib/elasticsearch_logs && \
+        chown -R elasticsearch:elasticsearch /var/lib/elasticsearch_logs
 
-RUN groupadd elasticsearch && useradd -g elasticsearch elasticsearch
+    USER elasticsearch
 
-RUN mkdir /var/lib/logs \
-    && chown elasticsearch:elasticsearch /var/lib/logs \
-    && mkdir /var/lib/data \
-    && chown elasticsearch:elasticsearch /var/lib/data \
-    && chown -R elasticsearch:elasticsearch ${ES_HOME} \
-    && mkdir ${ES_HOME}/snapshots \
-    && chown elasticsearch:elasticsearch ${ES_HOME}/snapshots
-
-EXPOSE 9200
-
-USER elasticsearch
-
-CMD ["/usr/sbin/init"]
-CMD ["/etc/elasticsearch-7.17.1/bin/elasticsearch"]
+    CMD ["/usr/sbin/init"]
+    CMD ["/usr/elasticsearch/elasticsearch-7.17.3/bin/elasticsearch"]
