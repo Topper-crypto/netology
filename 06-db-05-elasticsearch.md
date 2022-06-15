@@ -76,9 +76,11 @@ curl -XPUT http://localhost:9200/ind-2 -H 'Content-Type: application/json' -d'{ 
 curl -XPUT http://localhost:9200/ind-3 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 4,  "number_of_replicas": 2 }}'
 ```
 Cписок индексов и их статусов:
+
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic_2.png)
 
 Cостояние кластера elasticsearch:
+
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic_3.png)
 
 Удаление индексов
@@ -126,7 +128,9 @@ curl -XDELETE http://localhost:9200/ind-3
 ### Решение:
 
 Пересобираем образ с необходимой папкой
-```curl -XPUT http://localhost:9200/_snapshot/netology_backup?pretty -H 'content-type: application/json' -d'{ "type": "fs", "settings": { "location": "/usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots"}}'
+
+```
+curl -XPUT http://localhost:9200/_snapshot/netology_backup?pretty -H 'content-type: application/json' -d'{ "type": "fs", "settings": { "location": "/usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots"}}'
 ```
 ```
     FROM topper80/elastic:1.0
@@ -139,6 +143,7 @@ curl -XDELETE http://localhost:9200/ind-3
 
     USER elasticsearch
 ```
+
 Используя API зарегистрируем  директорию как snapshot repository c именем netology_backup
 ```
 curl -XPUT http://localhost:9200/_snapshot/netology_backup?pretty -H 'content-type: application/json' -d'{ "type": "fs", "settings": { "location": "/usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots"}}'
