@@ -1,0 +1,7 @@
+cluster.name: "netology-devops"
+path:
+  data: /var/lib/elasticsearch_data
+  logs: /var/lib/elasticsearch_logs
+node.name: netology_test
+transport.host: 127.0.0.1
+http.host: 0.0.0.0
