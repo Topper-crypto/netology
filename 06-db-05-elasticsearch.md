@@ -128,10 +128,6 @@ curl -XDELETE http://localhost:9200/ind-3
 ### Решение:
 
 Пересобираем образ с необходимой папкой
-
-```
-curl -XPUT http://localhost:9200/_snapshot/netology_backup?pretty -H 'content-type: application/json' -d'{ "type": "fs", "settings": { "location": "/usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots"}}'
-```
 ```
     FROM topper80/elastic:1.0
 
