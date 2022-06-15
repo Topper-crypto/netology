@@ -77,6 +77,7 @@ curl -XPUT http://localhost:9200/ind-3 -H 'Content-Type: application/json' -d'{ 
 ```
 Cписок индексов и их статусов:
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic_2.png)
+
 Cостояние кластера elasticsearch:
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic_3.png)
 
