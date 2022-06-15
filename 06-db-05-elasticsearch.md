@@ -121,3 +121,40 @@ curl -XDELETE http://localhost:9200/ind-3
 > 
 > Подсказки:
 > - возможно вам понадобится доработать `elasticsearch.yml` в части директивы `path.repo` и перезапустить `elasticsearch`
+
+### Решение:
+
+Пересобираем образ с необходимой папкой
+```curl -XPUT http://localhost:9200/_snapshot/netology_backup?pretty -H 'content-type: application/json' -d'{ "type": "fs", "settings": { "location": "/usr/elasticsearch/elasticsearch-7.17.3/bin/snapshots"}}'
+```
+
+![]()
+
+Создаём индекс test с 0 реплик и 1 шардом
+```
+curl -XPUT http://localhost:9200/test -H 'Content-Type: application/json' -d'{ "settings": { "number_of_sha
+rds": 1,  "number_of_replicas": 0 }}'
+```
+![]()
+
+Создаём snapshot состояния кластера elasticsearch
+```
+curl -XPUT http://localhost:9200/_snapshot/netology_backup/first_snapshot?wait_for_completion=true
+
+{"snapshot":{"snapshot":"first_snapshot","uuid":"cqIIRM4YQ0OTK5GwQg8h9g","repository":"netology_backup","version_id":7170399,"version":"7.17.3","indices":[".ds-.logs-deprecation.elasticsearch-default-2022.06.09-000001","test",".ds-ilm-history-5-2022.06.09-000001",".geoip_databases"],"data_streams":["ilm-history-5",".logs-deprecation.elasticsearch-default"],"include_global_state":true,"state":"SUCCESS","start_time":"2022-06-09T11:03:18.463Z","start_time_in_millis":1654772598463,"end_time":"2022-06-09T11:03:19.664Z","end_time_in_millis":1654772599664,"duration_in_millis":1201,"failures":[],"shards":{"total":4,"failed":0,"successful":4},"feature_states":[{"feature_name":"geoip","indices":[".geoip_databases"]}]}}
+```
+![]()
+
+Cписок файлов в директории со snapshotами
+вывод
+
+Удаляем индекс test и создайте индекс test-2
+
+![]()
+
+Восстанавливаем состояние кластера elasticsearch из snapshot, созданного ранее.
+
+```
+curl -XPOST localhost:9200/_snapshot/netology_backup/first_snapshot/_restore?pretty -H 'content-type: application/json' -d'{"indices": "test"}'
+```
+![]()
