@@ -34,6 +34,7 @@
 
 ### Решение:
 [Dockerfile](https://github.com/Topper-crypto/netology/blob/main/elasticsearch/Dockerfile)
+
 Файл конфигурации [elasticsearch.yml](https://github.com/Topper-crypto/netology/blob/main/elasticsearch/elasticsearch.yml)
 
 ```
@@ -45,7 +46,7 @@
 ```
 [topper@fedora elastic]$ sudo docker push topper80/elastic:v1
 ```
-[Образ в репозитории dockerhub]()
+[Образ в репозитории dockerhub](https://hub.docker.com/repository/docker/topper80/elastic)
 ```
 [topper@fedora elastic]$ sudo docker run -d -p 9200:9200 topper80/elastic:v1
 ```
