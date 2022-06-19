@@ -51,7 +51,7 @@
 [topper@fedora elastic]$ sudo docker run -d -p 9200:9200 topper80/elastic:v1
 ```
 ```
-curl -X GET 'http://localhost:9200/'
+[topper@fedora elastic]$ curl -X GET 'http://127.0.0.1:9200/'
 ```
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic.png)
 
