@@ -33,7 +33,25 @@
 > Далее мы будем работать с данным экземпляром elasticsearch.
 
 ### Решение:
+[Dockerfile](https://github.com/Topper-crypto/netology/blob/main/elasticsearch/Dockerfile)
+Файл конфигурации [elasticsearch.yml](https://github.com/Topper-crypto/netology/blob/main/elasticsearch/elasticsearch.yml)
 
+```
+[topper@fedora elastic]$ sudo docker build -t topper80/elastic:v1 .
+```
+```
+[topper@fedora elastic]$ sudo docker login
+```
+```
+[topper@fedora elastic]$ sudo docker push topper80/elastic:v1
+```
+[Образ в репозитории dockerhub]()
+```
+[topper@fedora elastic]$ sudo docker run -d -p 9200:9200 topper80/elastic:v1
+```
+```
+curl -X GET 'http://localhost:9200/'
+```
 ![](https://github.com/Topper-crypto/netology/blob/main/assets/elastic.png)
 
 > ## Задача 2
@@ -129,7 +147,7 @@ curl -XDELETE http://localhost:9200/ind-3
 
 Пересобираем образ с необходимой папкой
 ```
-    FROM topper80/elastic:1.0
+    FROM topper80/elastic:v1
 
     USER root
 
