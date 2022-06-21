@@ -192,8 +192,10 @@ title text UNIQUE,
 - Ограничение UNIQUE определяет, что группа из одного или нескольких столбцов таблицы может содержать только уникальные значения.
 
 Вариант 2.
+Для уникальности можно добавить unique-индекс и UNIQUE constraints.
 
 Создание индекса для таблицы orders поля title:
+
 ```
 create unique index orders_title_uindex on orders (title);
 ```
