@@ -47,4 +47,3 @@ https://github.com/hashicorp/terraform-provider-aws/blob/8e4d8a3f3f781b83f96217c
 `^[^a-zA-Z0-9-_]` -  и при этом начинаться только с букв, цифр, подчеркивания.
 
 https://github.com/hashicorp/terraform-provider-aws/blob/8e4d8a3f3f781b83f96217c2275f541c893fec5a/aws/validators.go#L1072
-                          
