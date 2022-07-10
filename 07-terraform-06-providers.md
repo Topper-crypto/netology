@@ -29,13 +29,22 @@ errors = append(errors, fmt.Errorf("%q cannot be longer than 80 characters", k))
          
 https://github.com/hashicorp/terraform-provider-aws/blob/8e4d8a3f3f781b83f96217c2275f541c893fec5a/aws/validators.go#L1038
          
- * Регулярка : 
- `^[0-9A-Za-z-_]+(\.fifo)?$` - может содержать только буквы и символы +".fofo" в конце есть еще 2 доп условия ниже по коду: 
-               
-NonFifo = `^[0-9A-Za-z-_]+$` - может содержать только буквы, цыфры, подчеркиваниеы, 
-                     
-Fifo = `^[0-9A-Za-z-_.]+$` - так же может содержать только буквы, цыфры, подчеркивание, а так же точку, 
-                     
-`^[^a-zA-Z0-9-_]` -  и при этом начинаться только с букв, цифр, подчеркивания,
-                            
+ * Регулярное выражение: 
+`^[0-9A-Za-z-_]+(\.fifo)?$` - может содержать только буквы и символы +".fifo".
+
 https://github.com/hashicorp/terraform-provider-aws/blob/8e4d8a3f3f781b83f96217c2275f541c893fec5a/aws/validators.go#L1041
+ 
+Есть еще 2 дополнитьльных условия ниже по коду: 
+               
+NonFifo = `^[0-9A-Za-z-_]+$` - может содержать только буквы, цыфры, подчеркиваниеы; 
+
+https://github.com/hashicorp/terraform-provider-aws/blob/8e4d8a3f3f781b83f96217c2275f541c893fec5a/aws/validators.go#L1054
+                     
+Fifo = `^[0-9A-Za-z-_.]+$` - так же может содержать только буквы, цыфры, подчеркивание, а так же точку; 
+
+https://github.com/hashicorp/terraform-provider-aws/blob/8e4d8a3f3f781b83f96217c2275f541c893fec5a/aws/validators.go#L1068
+                     
+`^[^a-zA-Z0-9-_]` -  и при этом начинаться только с букв, цифр, подчеркивания.
+
+https://github.com/hashicorp/terraform-provider-aws/blob/8e4d8a3f3f781b83f96217c2275f541c893fec5a/aws/validators.go#L1072
+                          
