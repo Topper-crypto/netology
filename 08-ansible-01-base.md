@@ -28,19 +28,30 @@
 topper@otus:~/ansible$ ansible-playbook -i inventory/test.yml site.yml
 ```
 ```yaml
-PLAY [Print os facts] ***********************************************************************************************************************************************************************
-TASK [Gathering Facts] ***********************************************************************************************************************************************************************[DEPRECATION WARNING]: Distribution debian 11.4 on host localhost should use /usr/bin/python3, but is using /usr/bin/python for backward compatibility with prior Ansible releases. A future Ansible release will default to using the
- discovered platform python for this host. See https://docs.ansible.com/ansible/2.10/reference_appendices/interpreter_discovery.html for more information. This feature will be removed in version 2.12. Deprecation warnings can be 
+PLAY [Print os facts] 
+***********************************************************************************************************************************************************************
+TASK [Gathering Facts] 
+***********************************************************************************************************************************************************************
+[DEPRECATION WARNING]: Distribution debian 11.4 on host localhost should use /usr/bin/python3, but is using /usr/bin/python for backward compatibility with prior 
+Ansible releases. A future Ansible release will default to using the
+ discovered platform python for this host. See https://docs.ansible.com/ansible/2.10/reference_appendices/interpreter_discovery.html for more information. This feature 
+ will be removed in version 2.12. Deprecation warnings can be 
 disabled by setting deprecation_warnings=False in ansible.cfg.
 ok: [localhost]
 
-TASK [Print OS] ***********************************************************************************************************************************************************************ok: [localhost] => {
+TASK [Print OS] 
+***********************************************************************************************************************************************************************
+ok: [localhost] => {
     "msg": "Debian"
 }
 
-TASK [Print fact] ***********************************************************************************************************************************************************************ok: [localhost] => {
+TASK [Print fact] 
+***********************************************************************************************************************************************************************
+ok: [localhost] => {
     "msg": 12
 }
 
-PLAY RECAP ***********************************************************************************************************************************************************************localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+PLAY RECAP 
+***********************************************************************************************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
