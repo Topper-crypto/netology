@@ -55,3 +55,20 @@ PLAY RECAP
 ***********************************************************************************************************************************************************************
 localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
+2.
+```
+topper@otus:~/ansible$ cat group_vars/all/examp.yml 
+```
+```yaml
+--- 
+  some_fact: 'all default fact'
+```
+```
+topper@otus:~/ansible$ ansible-playbook -i inventory/test.yml site.yml
+```
+```yaml
+...
+TASK [Print fact] ***********************************************************************************************************************************************************************ok: [localhost] => {
+    "msg": "all default fact"
+...
+```
