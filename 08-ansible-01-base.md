@@ -27,7 +27,7 @@
 ```
 topper@otus:~/ansible$ ansible-playbook -i inventory/test.yml site.yml
 ```
-```
+```yaml
 PLAY [Print os facts] ***********************************************************************************************************************************************************************
 TASK [Gathering Facts] ***********************************************************************************************************************************************************************[DEPRECATION WARNING]: Distribution debian 11.4 on host localhost should use /usr/bin/python3, but is using /usr/bin/python for backward compatibility with prior Ansible releases. A future Ansible release will default to using the
  discovered platform python for this host. See https://docs.ansible.com/ansible/2.10/reference_appendices/interpreter_discovery.html for more information. This feature will be removed in version 2.12. Deprecation warnings can be 
