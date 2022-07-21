@@ -25,7 +25,7 @@
 
 1.
 ```
-topper@otus:~/ansible$ ansible-playbook -i inventory/test.yml site.yml
+topper@netology:~/ansible$ ansible-playbook -i inventory/test.yml site.yml
 ```
 ```yaml
 PLAY [Print os facts] ********************************************************************************************************
@@ -52,14 +52,14 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 ```
 2.
 ```
-topper@otus:~/ansible$ cat group_vars/all/examp.yml 
+topper@netology:~/ansible$ cat group_vars/all/examp.yml 
 ```
 ```yaml
 --- 
   some_fact: 'all default fact'
 ```
 ```
-topper@otus:~/ansible$ ansible-playbook -i inventory/test.yml site.yml
+topper@netology:~/ansible$ ansible-playbook -i inventory/test.yml site.yml
 ```
 ```yaml
 ...
@@ -71,7 +71,7 @@ ok: [localhost] => {
 3. Выполнено
 4. 
 ```
-topper@otus:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml 
+topper@netology:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml 
 ```
 ```yaml
 PLAY [Print os facts] *********************************************************************************************************
@@ -102,18 +102,18 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 ```
 5.
 ```
-topper@otus:~/ansible$ cat group_vars/deb/examp.yml
+topper@netology:~/ansible$ cat group_vars/deb/examp.yml
 ---
   some_fact: "deb default fact"
 ```
 ```
-topper@otus:~/ansible$ cat group_vars/el/examp.yml
+topper@netology:~/ansible$ cat group_vars/el/examp.yml
 ---
   some_fact: "el default fact"
 ```
 6.
 ```
-topper@otus:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml 
+topper@netology:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml 
 ```
 ```yaml
 PLAY [Print os facts] *********************************************************************************************************
@@ -144,20 +144,20 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 ```
 7.
 ```
-topper@otus:~/ansible$ ansible-vault encrypt group_vars/deb/examp.yml
+topper@netology:~/ansible$ ansible-vault encrypt group_vars/deb/examp.yml
 New Vault password: 
 Confirm New Vault password: 
 Encryption successful
 ```
 ```
-topper@otus:~/ansible$ ansible-vault encrypt group_vars/el/examp.yml
+topper@netology:~/ansible$ ansible-vault encrypt group_vars/el/examp.yml
 New Vault password: 
 Confirm New Vault password: 
 Encryption successful
 ```
 8.
 ```
-topper@otus:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass
+topper@netology:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass
 Vault password:
 ```
 ```yaml
@@ -190,7 +190,7 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 9. Необходимо использовать "local"
 10.
 ```
-topper@otus:~/ansible$ cat inventory/prod.yml
+topper@netology:~/ansible$ cat inventory/prod.yml
 ---
   el:
     hosts:
@@ -207,7 +207,7 @@ topper@otus:~/ansible$ cat inventory/prod.yml
  ```
  11.
  ```
- topper@otus:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass
+ topper@netology:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass
 Vault password: 
 ```
 ```yaml
