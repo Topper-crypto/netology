@@ -223,9 +223,9 @@ ok: [localhost]
 ok: [centos7]
 ok: [ubuntu]
 
-TASK [Print OS] ************************************************************************************************************
+TASK [Print OS] ********************************************************************************************************************************
 ok: [localhost] => {
-    "msg": "Ubuntu"
+    "msg": "Debian"
 }
 ok: [centos7] => {
     "msg": "CentOS"
@@ -234,9 +234,9 @@ ok: [ubuntu] => {
     "msg": "Ubuntu"
 }
 
-TASK [Print fact] *********************************************************************************************************
+TASK [Print fact] ******************************************************************************************************************************
 ok: [localhost] => {
-    "msg": "all default fact"
+    "msg": "local default fact"
 }
 ok: [centos7] => {
     "msg": "el default fact"
@@ -245,9 +245,9 @@ ok: [ubuntu] => {
     "msg": "deb default fact"
 }
 
-PLAY RECAP *****************************************************************************************************************
+PLAY RECAP *************************************************************************************************************************************
 centos7                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
-12. !(https://github.com/Topper-crypto/netology/blob/main/ansible/README.md)
+12. https://github.com/Topper-crypto/netology/blob/main/ansible/README.md
