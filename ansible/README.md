@@ -18,8 +18,10 @@ ansible-vault decrypt data
 ```
 5. Можно ли посмотреть содержимое зашифрованного файла без команды расшифровки файла? Если можно, то как?
 
-Можно ansible-vault view data
-
+Можно.
+```
+ansible-vault view data
+```
 6. Как выглядит команда запуска `playbook`, если переменные зашифрованы?
 ```
 ansible-playbook -i ./invetory/test.yml site.yml --ask-vault-pass
