@@ -101,3 +101,87 @@ centos7                    : ok=3    changed=0    unreachable=0    failed=0    s
 ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 5.
+```
+topper@otus:~/ansible$ cat group_vars/deb/examp.yml
+---
+  some_fact: "deb default fact"
+```
+```
+topper@otus:~/ansible$ cat group_vars/el/examp.yml
+---
+  some_fact: "el default fact"
+```
+6.
+```
+topper@otus:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml 
+```
+```yaml
+PLAY [Print os facts] *********************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************
+ok: [centos7]
+ok: [ubuntu]
+
+TASK [Print OS] ***************************************************************************************************************
+ok: [centos7] => {
+    "msg": "CentOS"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+
+TASK [Print fact] *************************************************************************************************************
+ok: [centos7] => {
+    "msg": "el"
+}
+ok: [ubuntu] => {
+    "msg": "deb"
+}
+
+PLAY RECAP ********************************************************************************************************************
+centos7                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+7.
+```
+topper@otus:~/ansible$ ansible-vault encrypt group_vars/deb/examp.yml
+New Vault password: 
+Confirm New Vault password: 
+Encryption successful
+```
+```
+topper@otus:~/ansible$ ansible-vault encrypt group_vars/el/examp.yml
+New Vault password: 
+Confirm New Vault password: 
+Encryption successful
+```
+8.
+```
+topper@otus:~/ansible$ ansible-playbook -i inventory/prod.yml site.yml --ask-vault-pass
+Vault password:
+PLAY [Print os facts] *****************************************************************************************************************
+
+TASK [Gathering Facts] ****************************************************************************************************************
+ok: [ubuntu]
+ok: [centos7]
+
+TASK [Print OS] ***********************************************************************************************************************
+ok: [centos7] => {
+    "msg": "CentOS"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+
+TASK [Print fact] *********************************************************************************************************************
+ok: [centos7] => {
+    "msg": "el default fact"
+}
+ok: [ubuntu] => {
+    "msg": "deb default fact"
+}
+
+PLAY RECAP ****************************************************************************************************************************
+centos7                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
