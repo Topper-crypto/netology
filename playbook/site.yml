@@ -42,7 +42,7 @@
     tasks:
       - name: Upload tar.gz Elasticsearch from remote URL
         get_url:
-          url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ elastic_version }}-linux-x86_64.tar.gz"
+          url: "https://xn--62-6kc1apxaa9a3c.xn--p1ai/docs/elasticsearch-7.17.4-linux-x86_64.tar.gz"
           dest: "/tmp/elasticsearch-{{ elastic_version }}-linux-x86_64.tar.gz"
           mode: 0755
           timeout: 60
