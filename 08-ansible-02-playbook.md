@@ -16,3 +16,6 @@
 9. Подготовьте README.md файл по своему playbook. В нём должно быть описано: что делает playbook, какие у него есть параметры и теги.
 10. Готовый `playbook` выложите в свой репозиторий, в ответ предоставьте ссылку на него.
 ### Решение:
+
+
+!Описание playbook(https://github.com/Topper-crypto/netology/blob/main/playbook/README.md) 
