@@ -45,9 +45,9 @@ changed: [kibana]
 
 TASK [Extract java in the installation directory] ****************************************************************************
 An exception occurred during task execution. To see the full traceback, use -vvv. The error was: NoneType: None
-fatal: [elastic]: FAILED! => {"changed": false, "msg": "dest '/opt/jdk/11.0.15' must be an existing dir"}
+fatal: [elastic]: FAILED! => {"changed": false, "msg": "dest '/opt/jdk/11.0.16' must be an existing dir"}
 An exception occurred during task execution. To see the full traceback, use -vvv. The error was: NoneType: None
-fatal: [kibana]: FAILED! => {"changed": false, "msg": "dest '/opt/jdk/11.0.15' must be an existing dir"}
+fatal: [kibana]: FAILED! => {"changed": false, "msg": "dest '/opt/jdk/11.0.16' must be an existing dir"}
 
 PLAY RECAP *******************************************************************************************************************
 elastic                    : ok=4    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
