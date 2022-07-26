@@ -1,4 +1,8 @@
 ---
+  local:
+    hosts:
+      localhost:
+        ansible_connection: local
   elasticsearch:
     hosts:
       elastic:
@@ -6,4 +10,8 @@
   kibana:
     hosts:
       kibana:
+        ansible_connection: docker
+  logstash:
+    hosts:
+      logstash:
         ansible_connection: docker
