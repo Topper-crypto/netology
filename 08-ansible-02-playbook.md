@@ -81,4 +81,5 @@ logstash                   : ok=11   changed=8    unreachable=0    failed=0    s
 ```
 
 [Описание playbook](https://github.com/Topper-crypto/netology/blob/main/playbook/README.md) 
+
 [playbook](https://github.com/Topper-crypto/netology/tree/main/playbook)
