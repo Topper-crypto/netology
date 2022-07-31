@@ -31,10 +31,8 @@
 
 ### Решение:
 
-![](https://github.com/Topper-crypto/netology/blob/main/assets/bug.png)
-![](https://github.com/Topper-crypto/netology/blob/main/assets/all_not_bug.png)
-
 [workflow bug](https://github.com/Topper-crypto/netology/blob/main/assets/bug.xml)
+![](https://github.com/Topper-crypto/netology/blob/main/assets/bug.png)
 
 [workflow all not bug](https://github.com/Topper-crypto/netology/blob/main/assets/all_not_bug.xml)
-
+![](https://github.com/Topper-crypto/netology/blob/main/assets/all_not_bug.png)
