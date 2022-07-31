@@ -34,3 +34,13 @@
 4. Убедитесь в работоспособности своего стека. Возможно, потребуется тестировать все роли одновременно.
 5. Выложите свои roles в репозитории. В ответ приведите ссылки.
 ### Решение:
+
+Скачиваем роль
+```
+topper@netology:~/ansible_role$ ansible-galaxy install -r requirements.yml
+```
+```
+Starting galaxy role install process
+- extracting filebeat to /home/vagrant/.ansible/roles/elastic
+- elastic was installed successfully
+```
