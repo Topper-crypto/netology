@@ -37,10 +37,7 @@
 
 Скачиваем роль
 ```
-topper@netology:~/ansible_role$ ansible-galaxy install -r requirements.yml
-```
-```
-Starting galaxy role install process
-- extracting filebeat to /home/vagrant/.ansible/roles/elastic
-- elastic was installed successfully
+topper@netology:~/ansible_role$ ansible-galaxy install -r requirements.yml --roles-path ./
+- extracting java to /home/alex/devops-projects/myrepo/83_ansible/old_playbook/java
+- java (1.0.1) was installed successfully
 ```
