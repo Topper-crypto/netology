@@ -39,13 +39,13 @@
 1. Файл создан
 2. Роль скачана
 ```yaml
-topper@netology:~/ansible_role$ ansible-galaxy install -r requirements.yml --roles-path ./
-- extracting java to /home/alex/devops-projects/myrepo/83_ansible/old_playbook/java
+topper@netology:~/netology/ansible_role/playbook$ ansible-galaxy install -r requirements.yml --roles-path ./
+- extracting java to /home/topper/netology/ansible_role/playbook/java_role
 - java (1.0.1) was installed successfully
 ```
 3. Сценарии созданы
 ```yaml
-topper@netology:~/ansible_role$ molecule init scenario -d docker
+topper@netology:~/netology/ansible_role/playbook/java_role$ molecule init scenario -d docker
 INFO     Initializing new scenario default...
 INFO     Initialized scenario in /home/alex/devops-projects/myrepo/83_ansible/08_elastic-role/molecule/default successfully.
 ```
