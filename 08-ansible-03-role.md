@@ -39,22 +39,49 @@
 1. Файл создан
 2. Роль скачана
 ```yaml
-topper@netology:~/netology/ansible_role/playbook$ ansible-galaxy install -r requirements.yml --roles-path ./
-- extracting java to /home/topper/netology/ansible_role/playbook/java_role
+topper@netology:~/netology/ansible_roles/playbook$ ansible-galaxy install -r requirements.yml --roles-path ./
+- extracting java to /home/topper/netology/ansible_roles/playbook/java
 - java (1.0.1) was installed successfully
+```
+```yaml
+topper@netology:~/netology/ansible_roles/playbook/java$ molecule test
+INFO     default scenario test matrix: dependency, lint, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
+INFO     Performing prerun...
+WARNING  Computed fully qualified role name of java does not follow current galaxy requirements.
+Please edit meta/main.yml and assure we can correctly determine full role name:
+
+galaxy_info:
+role_name: my_name  # if absent directory name hosting role is used instead
+namespace: my_galaxy_namespace  # if absent, author is used instead
+
+Namespace: https://galaxy.ansible.com/docs/contributing/namespaces.html#galaxy-namespace-limitations
+Role: https://galaxy.ansible.com/docs/contributing/creating_role.html#role-names
+
+As an alternative, you can add 'role-name' to either skip_list or warn_list.
+
+INFO     Using ../../../../../.cache/roles/java symlink to current repository in order to enable Ansible to find the role using its expected full name.
+
+<skip some data>
+
+TASK [Delete docker network(s)] ****************************************************************************************************************
+
+PLAY RECAP *************************************************************************************************************************************
+localhost                  : ok=2    changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+
+INFO     Pruning extra files from scenario ephemeral directory
 ```
 3. Сценарии созданы
 ```yaml
-topper@netology:~/netology/ansible_role/playbook/java_role$ molecule init scenario -d docker
+topper@netology:~/netology/ansible_roles/elastic-role$ molecule init scenario -d docker
 INFO     Initializing new scenario default...
-INFO     Initialized scenario in /home/alex/devops-projects/myrepo/83_ansible/08_elastic-role/molecule/default successfully.
+INFO     Initialized scenario in /home/topper/netology/ansible_roles/elastic-role/molecule/default successfully.
 ```
 4. Добавлены дистрибутивы Ubuntu:latest, centors:7, 8
 ```yaml
-topper@netology:~/ansible_role$ molecule test
+topper@netology:~/netology/ansible_roles/elastic-role$ molecule test
 INFO     default scenario test matrix: dependency, lint, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
 INFO     Performing prerun...
-WARNING  Computed fully qualified role name of 08_elastic-role does not follow current galaxy requirements.
+WARNING  Computed fully qualified role name of elastic-role does not follow current galaxy requirements.
 Please edit meta/main.yml and assure we can correctly determine full role name:
 
 <skip some data>
@@ -82,18 +109,18 @@ INFO     Pruning extra files from scenario ephemeral directory
 ```
 5. Создана новая роли kibana_role
 ```yaml
-topper@netology:~/ansible_role$ molecule init role -d docker 08_kibana-role
-INFO     Initializing new role 08_kibana-role...
+topper@netology:~/netology/ansible_roles$ molecule init role -d docker kibana-role
+INFO     Initializing new role kibana-role...
 Using /etc/ansible/ansible.cfg as config file
-- Role 08_kibana-role was created successfully
-INFO     Initialized role in /home/alex/devops-projects/myrepo/83_ansible/08_kibana-role successfully.
+- Role kibana-role was created successfully
+INFO     Initialized role in /home/topper/netology/ansible_roles/kibana-role successfully.
 ```
 Тестирование роли
 ```yaml
-topper@netology:~/ansible_role$ molecule test
+topper@netology:~/netology/ansible_roles/kibana-role$ molecule test
 INFO     default scenario test matrix: dependency, lint, cleanup, destroy, syntax, create, prepare, converge, idempotence, side_effect, verify, cleanup, destroy
 INFO     Performing prerun...
-WARNING  Computed fully qualified role name of 08_kibana-role does not follow current galaxy requirements.
+WARNING  Computed fully qualified role name of kibana-role does not follow current galaxy requirements.
 Please edit meta/main.yml and assure we can correctly determine full role name:
 
 <skip some data>
@@ -112,7 +139,7 @@ changed: [centos8]
 changed: [ubuntu]
 changed: [centos7]
 
-TASK [kibana-role : Create directrory for Kibana (/opt/kibana/7.12.0)] **********************************************************************
+TASK [kibana-role : Create directrory for Kibana (/opt/kibana/7.16.3)] **********************************************************************
 changed: [centos7]
 changed: [ubuntu]
 changed: [centos8]
@@ -177,9 +204,9 @@ TASK [Wait for instance(s) deletion to complete] *******************************
 FAILED - RETRYING: Wait for instance(s) deletion to complete (300 retries left).
 FAILED - RETRYING: Wait for instance(s) deletion to complete (299 retries left).
 FAILED - RETRYING: Wait for instance(s) deletion to complete (298 retries left).
-changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '914470095185.89836', 'results_file': '/home/alex/.ansible_async/914470095185.89836', 'changed': True, 'failed': False, 'item': {'image': 'docker.io/pycontribs/centos:8', 'name': 'centos8', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
-changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '48492610635.89861', 'results_file': '/home/alex/.ansible_async/48492610635.89861', 'changed': True, 'failed': False, 'item': {'image': 'docker.io/pycontribs/centos:7', 'name': 'centos7', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
-changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '604199252717.89886', 'results_file': '/home/alex/.ansible_async/604199252717.89886', 'changed': True, 'failed': False, 'item': {'image': 'docker.io/pycontribs/ubuntu:latest', 'name': 'ubuntu', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
+changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '914470095176.89836', 'results_file': '/home/topper/.ansible_async/914470095176.89836', 'changed': True, 'failed': False, 'item': {'image': 'docker.io/pycontribs/centos:8', 'name': 'centos8', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
+changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '48492610677.89861', 'results_file': '/home/topper/.ansible_async/48492610677.89861', 'changed': True, 'failed': False, 'item': {'image': 'docker.io/pycontribs/centos:7', 'name': 'centos7', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
+changed: [localhost] => (item={'started': 1, 'finished': 0, 'ansible_job_id': '604199252728.89886', 'results_file': '/home/topper/.ansible_async/604199252728.89886', 'changed': True, 'failed': False, 'item': {'image': 'docker.io/pycontribs/ubuntu:latest', 'name': 'ubuntu', 'pre_build_image': True}, 'ansible_loop_var': 'item'})
 
 TASK [Delete docker network(s)] ****************************************************************************************************************
 
@@ -210,7 +237,7 @@ INFO     Pruning extra files from scenario ephemeral directory
 ```
 9. playbook переработан на использование roles
 ```yaml
-topper@netology:~/ansible_role$ ansible-playbook -i inventory/prod.yml site.yml
+/netology/ansible_roles/playbook$ ansible-playbook -i inventory/prod.yml site.yml
 
 PLAY [all] *************************************************************************************************************************************
 
@@ -263,7 +290,7 @@ ok: [kibana]
 TASK [kibana-role : Upload tar.gz Kibana from remote URL] **************************************************************************************
 changed: [kibana]
 
-TASK [kibana-role : Create directrory for Kibana (/opt/kibana/7.12.0)] *************************************************************************
+TASK [kibana-role : Create directrory for Kibana (/opt/kibana/7.16.3)] *************************************************************************
 changed: [kibana]
 
 TASK [kibana-role : Extract Kibana in the installation directory] ******************************************************************************
