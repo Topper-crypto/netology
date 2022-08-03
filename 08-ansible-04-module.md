@@ -235,6 +235,14 @@ Created collection for my_own_netology.my_own_collection at /home/topper/netolog
 15. collection установлен из локального архива
 ```yaml
 $ ansible-galaxy collection install my_own_netology-my_own_collection-1.0.0.tar.gz -p .
+$ ansible-galaxy collection install my_netology-my_collection-1.0.0.tar.gz -p .
+Starting galaxy collection install process
+[WARNING]: The specified collections path '/home/topper/netology/ansible_module/my_own_collection/my_own_netology/my_own_collection' is not part of the configured Ansible collections paths
+'/home/topper/.ansible/collections:/usr/share/ansible/collections'. The installed collection won't be picked up in an Ansible run.
+Process install dependency map
+Starting collection install process
+Installing 'my_netology.my_collection:1.0.0' to '/home/topper/netology/ansible_module/my_own_collection/my_own_netology/my_own_collection/ansible_collections/my_own_netology/my_own_collection'
+my_own_netology.my_own_collection (1.0.0) was installed successfully
 ```
 16. 
 ```yaml
