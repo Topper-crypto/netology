@@ -244,7 +244,7 @@ Starting collection install process
 Installing 'my_netology.my_collection:1.0.0' to '/home/topper/netology/ansible_module/my_own_collection/my_own_netology/my_own_collection/ansible_collections/my_own_netology/my_own_collection'
 my_own_netology.my_own_collection (1.0.0) was installed successfully
 ```
-16. 
+16. Запуск playbook
 ```yaml
 $ ansible-playbook site.yml
 [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost
