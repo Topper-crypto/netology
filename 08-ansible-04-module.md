@@ -190,14 +190,7 @@ multi line
 5. Написан playbook
 6. Проверка  playbook
 ```yaml
-ansible-playbook test_pb.yml 
-[WARNING]: You are running the development version of Ansible. You should only run Ansible from "devel"
-if you are modifying the Ansible engine, or trying out features under development. This is a rapidly
-changing source of code and can become unstable at any point.
-[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost
-does not match 'all'
-[WARNING]: ansible.utils.display.initialize_locale has not been called, this may result in incorrectly
-calculated text widths that can cause Display to print incorrect line lengths
+$ ansible-playbook test_pb.yml 
 
 PLAY [test my module] **********************************************************************************
 
@@ -222,12 +215,12 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 ```
 7. Выходим из окружения
 ```yaml
-$  deactivate
+$ deactivate
 ```
 8. 
 ```yaml
 $ ansible-galaxy collection init my_own_netology.my_own_collection
-- Collection my_netology.my_collection was created successfully
+- Collection my_own_netology.my_own_collection was created successfully
 ```
 9. module перенесен 
 10. Single task playbook преобразован в single task role и перенесите в collection
@@ -236,21 +229,12 @@ $ ansible-galaxy collection init my_own_netology.my_own_collection
 13. Создан .tar.gz
 ```yaml
 $ ansible-galaxy collection build
-Created collection for my_own_netology.my_own_collection at /home/topper/netology/ansible_module/my_collection/my_own_netology/my_own_collection/my_own_netology-my_own_collection-1.0.0.tar.gz
+Created collection for my_own_netology.my_own_collection at /home/topper/netology/ansible_module/my_own_collection/my_own_netology/my_own_collection/my_own_netology-my_own_collection-1.0.0.tar.gz
 ```
 14. Директория создана, single task playbook и архив c collection перенесены
 15. collection установлен из локального архива
 ```yaml
-$ ansible-galaxy collection install nchepurnenko-yandex_cloud_elk-1.0.0.tar.gz -p .
-Starting galaxy collection install process
-[WARNING]: The specified collections path '/home/user/repos/08-ansible-06-module/playbook' is not part
-of the configured Ansible collections paths
-'/home/user/.ansible/collections:/usr/share/ansible/collections'. The installed collection won't be
-picked up in an Ansible run.
-Process install dependency map
-Starting collection install process
-Installing 'nchepurnenko.yandex_cloud_elk:1.0.0' to '/home/user/repos/08-ansible-06-module/playbook/ansible_collections/nchepurnenko/yandex_cloud_elk'
-nchepurnenko.yandex_cloud_elk:1.0.0 was installed successfully
+$ ansible-galaxy collection install my_own_netology-my_own_collection-1.0.0.tar.gz -p .
 ```
 16. 
 ```yaml
