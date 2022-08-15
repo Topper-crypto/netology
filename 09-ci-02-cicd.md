@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "09.02 CI\CD"
+# Домашнее задание к занятию 09.02 CI\CD"
 
 ## Знакомоство с SonarQube
 
@@ -52,6 +52,12 @@
 3. Проверяем, что все файлы загрузились успешно
 4. В ответе присылаем файл `maven-metadata.xml` для этого артефекта
 
+### Решение
+
+![](https://github.com/Topper-crypto/netology/blob/main/assets/maven-metadata.png)
+
+[maven-metadata.xml](https://github.com/Topper-crypto/netology/blob/main/assets/maven-metadata.xml)
+
 ### Знакомство с Maven
 
 ### Подготовка к выполнению
@@ -68,10 +74,8 @@
 3. Проверяем директорию `~/.m2/repository/`, находим наш артефакт
 4. В ответе присылаем исправленный файл `pom.xml`
 
----
+### Решение
 
-### Как оформить ДЗ?
+![]()
 
-Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
-
----
+[pom.xml](https://github.com/Topper-crypto/netology/blob/main/assets/pom.xml)
