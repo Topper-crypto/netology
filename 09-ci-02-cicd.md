@@ -79,11 +79,11 @@
 ```yaml
 topper@netology:~/.m2/repository/netology/java/8_282$ ls -l
 итого 24
--rw-r--r-- 1 topper topper 0 авг 15 22:08 java-8_282-distrib.tar.gz
--rw-r--r-- 1 topper topper 0 авг 15 22:10 java-8_282-distrib.tar.gz.lastUpdated
--rw-r--r-- 1 topper topper 0 авг 15 22:08 java-8_282-distrib.tar.gz.sha1
--rw-r--r-- 1 topper topper 0 авг 15 22:08 java-8_282.pom.lastUpdated
--rw-r--r-- 1 topper topper 0 авг 15 22:09 _remote.repositories
+-rw-r--r-- 1 topper topper 0 авг 15 22:01 java-8_282-distrib.tar.gz
+-rw-r--r-- 1 topper topper 0 авг 15 22:01 java-8_282-distrib.tar.gz.lastUpdated
+-rw-r--r-- 1 topper topper 0 авг 15 22:01 java-8_282-distrib.tar.gz.sha1
+-rw-r--r-- 1 topper topper 0 авг 15 22:01 java-8_282.pom.lastUpdated
+-rw-r--r-- 1 topper topper 0 авг 15 22:01 _remote.repositories
 ```
 
 [pom.xml](https://github.com/Topper-crypto/netology/blob/main/assets/pom.xml)
